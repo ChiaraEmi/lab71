@@ -6,12 +6,14 @@ import java.util.List;
 
 import static it.unibo.inner.test.Assertions.assertContentEqualsInOrder;
 
+import it.unibo.inner.impl.IterableImpl;
+
 public class TestIterablePlain {
 
     private TestIterablePlain() {}
 
     private static <T> IterableWithPolicy<T> getIterableWithPolicy(T[] elements) {
-        return null; // TODO: return the implementation of IterableWithPolicy
+        return new IterableImpl(elements); 
     }
 
     public static void main(final String[] args) {
