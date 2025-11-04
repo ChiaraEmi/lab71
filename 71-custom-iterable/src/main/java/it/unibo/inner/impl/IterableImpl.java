@@ -46,19 +46,20 @@ public class IterableImpl<T> implements IterableWithPolicy<T>{
 
         @Override
         public boolean hasNext(){
-            if(i + 1 < IterableImpl.this.list.size()){
-                return true;
+            while(i + 1 < IterableImpl.this.list.size()){
+                if(IterableImpl.this.filter.test(IterableImpl.this.list.get(i + 1))){
+                    return true;
+                }
+                i++;
             }
             return false;
         }
 
         @Override
         public T next(){
-            while(hasNext()){
+            if(hasNext()){
                 i++;
-                if(IterableImpl.this.filter.test(IterableImpl.this.list.get(i))){
-                    return IterableImpl.this.list.get(i);
-                }
+                return IterableImpl.this.list.get(i);
             }
             return null;
         }
