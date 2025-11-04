@@ -17,7 +17,7 @@ public class IterableImpl<T> implements IterableWithPolicy<T>{
             public boolean test(T elem) {
                 return true;
             }
-        })
+        });
     }
 
     public IterableImpl(final T[] elements, final Predicate<T> filter){
@@ -33,7 +33,7 @@ public class IterableImpl<T> implements IterableWithPolicy<T>{
         this.filter = filter;
     }
 
-    public InnerIterator iterator(){
+    public Iterator<T> iterator(){
         return new InnerIterator();
     }
 
