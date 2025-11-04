@@ -28,7 +28,9 @@ public class IterableImpl<T> implements IterableWithPolicy<T>{
        this.filter = filter;
     }
 
-    public void setIterationPolicy(Predicate<T> filter){
+    @Override
+    public void setIterationPolicy(Predicate<T> filter) {
+        this.filter = filter;
     }
 
     public InnerIterator iterator(){
