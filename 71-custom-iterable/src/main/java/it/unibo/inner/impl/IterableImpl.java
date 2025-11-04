@@ -2,9 +2,12 @@ package it.unibo.inner.impl;
 
 import it.unibo.inner.api.IterableWithPolicy;
 import it.unibo.inner.api.Predicate;
+
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class IterableImpl<T> implements IterableWithPolicy<T>{
     
@@ -61,7 +64,9 @@ public class IterableImpl<T> implements IterableWithPolicy<T>{
                 i++;
                 return IterableImpl.this.list.get(i);
             }
-            return null;
+            else{
+                throw new NoSuchElementException();
+            }
         }
     }
 }
