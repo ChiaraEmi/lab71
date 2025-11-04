@@ -44,6 +44,7 @@ public class IterableImpl<T> implements IterableWithPolicy<T>{
             this.i = -1;
         }
 
+        @Override
         public boolean hasNext(){
             if(i + 1 < IterableImpl.this.list.size()){
                 return true;
@@ -51,10 +52,13 @@ public class IterableImpl<T> implements IterableWithPolicy<T>{
             return false;
         }
 
+        @Override
         public T next(){
-            if(hasNext()){
+            while(hasNext()){
                 i++;
-                return IterableImpl.this.list.get(i);
+                if(IterableImpl.this.filter.test(IterableImpl.this.list.get(i))){
+                    return IterableImpl.this.list.get(i);
+                }
             }
             return null;
         }
