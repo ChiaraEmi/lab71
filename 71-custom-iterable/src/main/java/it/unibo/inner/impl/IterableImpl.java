@@ -12,10 +12,12 @@ public class IterableImpl<T> implements IterableWithPolicy<T>{
     private Predicate<T> filter;
 
     public IterableImpl(final T[] elements){
-       this.list = new ArrayList<>();
-       for(T i : elements){
-            list.add(i);
-       }
+       this(elements, new Predicate<T> (){
+            @Override
+            public boolean test(T elem) {
+                return true;
+            }
+        })
     }
 
     public IterableImpl(final T[] elements, final Predicate<T> filter){
