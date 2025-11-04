@@ -9,13 +9,21 @@ import java.util.List;
 public class IterableImpl<T> implements IterableWithPolicy<T>{
     
     private List<T> list;
-    private int i;
+    private Predicate<T> filter;
 
     public IterableImpl(final T[] elements){
        this.list = new ArrayList<>();
        for(T i : elements){
             list.add(i);
        }
+    }
+
+    public IterableImpl(final T[] elements, final Predicate<T> filter){
+       this.list = new ArrayList<>();
+       for(T i : elements){
+            list.add(i);
+       }
+       this.filter = filter;
     }
 
     public void setIterationPolicy(Predicate<T> filter){
