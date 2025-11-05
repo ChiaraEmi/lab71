@@ -38,6 +38,25 @@ public final class MonthSorterNested implements MonthSorter {
             return this.days;
         }
 
+        public Month fromString(String month){
+            String prefix = month.substring(beginIndex, endIndex);
+            List<Month> monthFound= new ArrayList<>();
+            for(Month m : values()){
+                if(m.name().compareToIgnoreCase(month) == 0){
+                    monthFound.add(m);
+                } else if (m.name().compareToIgnoreCase(prefix) == 0) {
+                    monthFound.add(m);
+                }
+            }
+
+            if(monthFound.isEmpty()){
+                throw new IllegalArgumentException("No month with such name.");
+            } else if (monthFound.size() > 1) {
+                throw new IllegalArgumentException("Ambiguous month name.");
+            }
+
+            return monthFound.get(beginIndex);
+        }
         
     }
 
