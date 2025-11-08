@@ -11,8 +11,10 @@ import java.util.Objects;
  */
 public final class MonthSorterNested implements MonthSorter {
 
-    private static int beginIndex = 0;
-    private static int endIndex = 1;
+    private static final int FIRST_POS = 0;
+    private static final Comparator<String> SORT_MORDER = new SortByMonthOrder();
+    private static final Comparator<String> SORT_DORDER = new SortByDate();
+
 
     private enum Month{
         JANUARY(31),
@@ -39,12 +41,11 @@ public final class MonthSorterNested implements MonthSorter {
         }
 
         public static Month fromString(String month){
-            String prefix = month.substring(beginIndex, endIndex);
             List<Month> monthFound= new ArrayList<>();
             for(Month m : values()){
                 if(m.name().compareToIgnoreCase(month) == 0){
                     monthFound.add(m);
-                } else if (m.name().compareToIgnoreCase(prefix) == 0) {
+                } else if (m.name().startsWith(month)) {
                     monthFound.add(m);
                 }
             }
@@ -55,19 +56,19 @@ public final class MonthSorterNested implements MonthSorter {
                 throw new IllegalArgumentException("Ambiguous month name.");
             }
 
-            return monthFound.get(beginIndex);
+            return monthFound.get(FIRST_POS);
         }
         
     }
 
     @Override
     public Comparator<String> sortByDays() {
-        return null;
+        return SORT_DORDER;
     }
 
     @Override
     public Comparator<String> sortByOrder() {
-        return null;
+        return SORT_MORDER;
     }
 
     private static final class SortByMonthOrder implements Comparator<String> {
