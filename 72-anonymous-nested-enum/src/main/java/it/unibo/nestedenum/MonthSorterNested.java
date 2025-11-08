@@ -45,7 +45,7 @@ public final class MonthSorterNested implements MonthSorter {
             for(Month m : values()){
                 if(m.name().compareToIgnoreCase(month) == 0){
                     monthFound.add(m);
-                } else if (m.name().startsWith(month)) {
+                } else if (m.name().startsWith(month.toUpperCase())) {
                     monthFound.add(m);
                 }
             }
