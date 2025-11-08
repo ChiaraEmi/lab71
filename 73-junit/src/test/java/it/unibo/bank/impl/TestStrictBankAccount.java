@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Test class for the {@link StrictBankAccount} class.
  */
 class TestStrictBankAccount {
+    private static final int AMOUNT = 100;
+    public static final double TRANSACTION_FEE = 0.1;
+    public static final double MANAGEMENT_FEE = 5;
 
     // Create a new AccountHolder and a StrictBankAccount for it each time tests are executed.
     private AccountHolder mRossi;
@@ -23,7 +26,7 @@ class TestStrictBankAccount {
     @BeforeEach
     public void setUp() {
         this.mRossi = new AccountHolder("Mario", "Rossi", 1);
-        this.bankAccount = new SimpleBankAccount(mRossi, 0.0);
+        this.bankAccount = new StrictBankAccount(mRossi, 0.0);
     }
 
     /**
@@ -41,7 +44,10 @@ class TestStrictBankAccount {
      */
     @Test
     public void testManagementFees() {
-        fail("To be implemented");
+        bankAccount.deposit(mRossi.getUserID(), AMOUNT);
+        bankAccount.chargeManagementFees(mRossi.getUserID());
+        final double expectedBalance = AMOUNT - MANAGEMENT_FEE - TRANSACTION_FEE;
+        assertEquals(expectedBalance, bankAccount.getBalance());
     }
 
     /**
