@@ -38,7 +38,7 @@ public final class MonthSorterNested implements MonthSorter {
             return this.days;
         }
 
-        public Month fromString(String month){
+        public static Month fromString(String month){
             String prefix = month.substring(beginIndex, endIndex);
             List<Month> monthFound= new ArrayList<>();
             for(Month m : values()){
@@ -69,4 +69,14 @@ public final class MonthSorterNested implements MonthSorter {
     public Comparator<String> sortByOrder() {
         return null;
     }
+
+    private static final class SortByMonthOrder implements Comparator<String> {
+
+        @Override
+        public int compare(String o1, String o2) {
+            return Month.fromString(o1).compareTo(Month.fromString(o2));
+        }
+        
+    }
+
 }
