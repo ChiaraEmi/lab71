@@ -75,6 +75,13 @@ class TestStrictBankAccount {
      */
     @Test
     public void testWithdrawingTooMuch() {
-        fail("To be implemented");
+        try {
+            bankAccount.withdraw(mRossi.getUserID(), AMOUNT);
+            Assertions.fail("Withdrawing more money than it is in the account was possible, but should have thrown an exception");
+        } catch (final IllegalArgumentException e) {
+            assertEquals(0, bankAccount.getBalance()); // No money was deposited, balance is consistent
+            assertNotNull(e.getMessage()); // Non-null message
+            assertFalse(e.getMessage().isBlank()); // Not a blank or empty message
+        }
     }
 }
