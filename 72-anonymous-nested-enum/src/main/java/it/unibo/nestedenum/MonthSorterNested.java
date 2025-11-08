@@ -79,4 +79,17 @@ public final class MonthSorterNested implements MonthSorter {
         
     }
 
+    private static final class SortByDate implements Comparator<String> {
+
+        @Override
+        public int compare(String o1, String o2) {
+            int days1;
+            int days2;
+            days1 = Month.fromString(o1).days;
+            days2 = Month.fromString(o2).days;
+            return Integer.compare(days1, days2);
+        }
+        
+    }
+
 }

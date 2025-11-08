@@ -29,7 +29,6 @@ public interface Function<I, O> {
             public T call(T input) {
                 return input;
             }
-            
         };
     }
 
